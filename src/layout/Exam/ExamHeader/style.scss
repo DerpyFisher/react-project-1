@@ -1,0 +1,20 @@
+.examHeader {
+    background-color: rgb(240, 240, 240);
+    position: -webkit-sticky;
+    position: sticky;
+    top:0;
+    padding-top: 1vi;
+    width:100%;
+    z-index:100;
+}
+
+.headerComponent {
+    padding: auto;
+    margin: auto 2dvw;
+    display: inline-block;
+    text-align: left;
+}
+
+.headerComponent>h1 {
+    font-size: 3vw;
+}

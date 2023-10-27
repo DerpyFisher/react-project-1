@@ -1,0 +1,18 @@
+.textInput {
+    height: 10%;
+    width: 70%;
+    font-size: 3dvi;
+    color: rgb(155, 155, 155);
+    border: none;
+    border-bottom: 0.2dvh solid black;
+    margin-top: 0.1dvh;
+    margin-bottom: 0;
+    transition: background-color 1s, color 1s;
+}
+
+.textInput:focus, .textInput:hover {
+    background-color: rgb(210, 210, 210);
+    color: rgb(0, 0, 0);
+    outline: none;
+    transition: background-color 1s, color 1s;
+}

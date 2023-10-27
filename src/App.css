@@ -1,0 +1,8 @@
+* {
+  background-color: unset;
+}
+
+html, body, #app, #app>div {
+  text-align: center;
+  height: 100%
+}
