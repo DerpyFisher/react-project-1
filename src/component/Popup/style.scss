@@ -1,0 +1,29 @@
+.popUp {
+    text-align: center;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100dvh;
+    font-size: 2dvi;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popUpInner {
+    background-color: rgb(255, 255, 255);
+    padding: 2dvh 10dvh;
+    border: 0.25dvi solid rgb(61, 61, 61);
+    box-shadow: 10px 10px rgb(0, 0, 0);
+}
+
+.popUpInner>p {
+    position: relative;
+    display: inline-block;
+    margin-right: 2dvw;
+}
+
+.popUpInner>button {
+    font-size: 2dvi;
+}

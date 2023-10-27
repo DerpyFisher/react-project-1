@@ -1,5 +1,6 @@
 import React from 'react';
 import './style.scss';
+import { shuffle } from '../../utils/shuffleQuestion';
 
 /**
  * The question div of each quizz in the exam.
@@ -10,32 +11,65 @@ import './style.scss';
  * @returns a "form" with a question and 4 answer.
  * @version 1.0.0.0
  */
-export default function QuestionForm({question, answerList}) {
+export default function QuestionForm({question}) {
     // Constants storing the question answers.
-    const [firstAnswer, secondAnswer, thirdAnswer, fourthAnswer] = answerList;
+    //const [firstAnswer, secondAnswer, thirdAnswer, fourthAnswer] = question.answer;
+
+    const HandleChange = (questionID, answerID) =>() => {
+        let ls = JSON.parse(localStorage.getItem("result"))??[];
+
+        for (let i=0; i < ls.length; i++) {
+            if (ls[i].quesId === questionID) {
+                ls[i].answerId = answerID;
+                localStorage.setItem('result', JSON.stringify(ls));
+                return;
+            }
+        }
+        localStorage.setItem('result', JSON.stringify([...ls,
+                {
+                "quesId": questionID,
+                "answerId": answerID,
+                },
+        ]))
+    }
 
     return (
         <div key={question.id} className="questionForm">
-            <h2 id={"question"+question.id} className="examQquestion">{question.content}</h2>
+            <h2 className="examQuestion">{question.content}</h2>
+            { shuffle(Object.values(question.answer)).map((v, i) => {
+                    return <label htmlFor={i} key={v.id} className="answer">
+                    <input onChange={HandleChange(question.id, v.id)} type="radio" name={question.id} />
+                        {v.content}
+                        <br/>
+                    </label>
+                })
+            }
+            
+        </div>
+
+    )
+}
+
+/* <div key={question.id} className="questionForm">
+            <h2 className="examQuestion">{question.content}</h2>
             <label htmlFor="1" id={firstAnswer.id} className="answer">
-                <input type="radio" name={`question_${question.id}_answer`} id={`question_${question.id}_answer_1`}/>
+                <input onChange={HandleChange(question.id, firstAnswer.id)} type="radio" name={question.id} />
                 {firstAnswer.content}
             </label>
             <br/>
             <label htmlFor="2" id={secondAnswer.id} className="answer">
-                <input type="radio" name={`question_${question.id}_answer`} id={`question_${question.id}_answer_2`}/>
+                <input onChange={HandleChange(question.id, secondAnswer.id)} type="radio" name={question.id}/>
                 {secondAnswer.content}
             </label>
             <br/>
             <label htmlFor="3" id={thirdAnswer.id} className="answer">
-                <input type="radio" name={`question_${question.id}_answer`} id={`question_${question.id}_answer_3`}/>
+                <input onChange={HandleChange(question.id, thirdAnswer.id)} type="radio" name={question.id}/>
                 {thirdAnswer.content}
             </label>
             <br/>
             <label htmlFor="4" id={fourthAnswer.id} className="answer">
-                <input type="radio" name={`question_${question.id}_answer`} id={`question_${question.id}_answer_4`}/>
+                <input onChange={HandleChange(question.id, fourthAnswer.id)} type="radio" name={question.id}/>
                 {fourthAnswer.content}
             </label>
-        </div>
-    )
-}
+        </div> */
+
