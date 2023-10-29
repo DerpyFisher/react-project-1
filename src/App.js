@@ -12,7 +12,7 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path = "/" element={<Home />} />
-          <Route path="/exam" element={<Exam />} />
+          <Route path="/exam/:id" element={<Exam />} />
           <Route path="/error" element={<Error />} />
           <Route path ="/finished" element={<Finished />} />
         </Routes>
