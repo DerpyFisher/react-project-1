@@ -23,7 +23,7 @@ export default function Home() {
     // Handler for button.
     const HandleButtonClick = async() => {
         if (localStorage.getItem("exam") !== null) {
-            navigation('/exam');
+            navigation('/exam/'+localStorage.getItem("examCode"));
             return;
         }
         else {
@@ -39,10 +39,11 @@ export default function Home() {
                 }
                 else {
                     const result = await apiCall.json();
+                    localStorage.setItem('examCode', examCode);
                     localStorage.setItem("email", email);
                     localStorage.setItem('startTime', Date.now());
                     localStorage.setItem("exam", JSON.stringify(result));
-                    navigation('/exam');
+                    navigation('/exam/'+localStorage.getItem("examCode"));
                 }
             } catch (err) {
                 setErrorMessage("Something wrong while getting the exam information!");

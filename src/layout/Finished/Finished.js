@@ -12,7 +12,7 @@ export default function Finished() {
 
     const cleanUp = () => {
         if (!isFinished) {
-            navigation('/exam');
+            navigation('/exam/'+localStorage.getItem("examCode"));
         }
         else {
             localStorage.clear();
