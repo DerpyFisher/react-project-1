@@ -15,12 +15,19 @@ export default function QuestionForm({question}) {
     // Constants storing the question answers.
     //const [firstAnswer, secondAnswer, thirdAnswer, fourthAnswer] = question.answer;
 
-    const HandleChange = (questionID, answerID) =>() => {
+    const HandleChange = (questionID, answerID) => (state) => {
         let ls = JSON.parse(localStorage.getItem("result"))??[];
-
         for (let i=0; i < ls.length; i++) {
             if (ls[i].quesId === questionID) {
-                ls[i].answerId = answerID;
+                
+                if (state.target.checked == true) {
+                    console.log(`Adding ${answerID} to ${questionID}`)
+                    ls[i].answerId = [...ls[i].answerId, answerID];
+                }
+                else {
+                    console.log(`removing ${answerID} from ${questionID}`)
+                    ls[i].answerId.splice(ls[i].answerId.indexOf(answerID), 1);
+                }
                 localStorage.setItem('result', JSON.stringify(ls));
                 return;
             }
@@ -28,17 +35,18 @@ export default function QuestionForm({question}) {
         localStorage.setItem('result', JSON.stringify([...ls,
                 {
                 "quesId": questionID,
-                "answerId": answerID,
+                "answerId": [answerID],
                 },
         ]))
     }
+
 
     return (
         <div key={question.id} className="questionForm">
             <h2 className="examQuestion">{question.content}</h2>
             { shuffle(Object.values(question.answer)).map((v, i) => {
                     return <label htmlFor={i} key={v.id} className="answer">
-                    <input onChange={HandleChange(question.id, v.id)} type="radio" name={question.id} />
+                    <input type="checkbox" onChange={HandleChange(question.id, v.id)} name={question.id} />
                         {v.content}
                         <br/>
                     </label>
