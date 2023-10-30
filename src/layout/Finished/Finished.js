@@ -23,7 +23,7 @@ export default function Finished() {
   
     return (
     <div className='finishedScreen'>
-        <h1>{isFinished?"You have finished the test!":"Hey, you are not suppose to be here! get back to your exam."}</h1>
+        <h1>{isFinished?`You have finished the test! Your score is: ${localStorage.getItem('userScore')}`:"Hey, you are not suppose to be here! get back to your exam."}</h1>
         <SubmitButton onclickEvent={cleanUp} text={isFinished?"Back to home":"Back to exam."}/>
     </div>
   )
