@@ -18,7 +18,7 @@ export default function Exam() {
 
     const onSubmit = useCallback(async() => {
         localStorage.setItem('finishedTime', Date.now());
-        getPoint(PRODUCTION_DOMAIN+ "answer/" + localStorage.getItem('examCode'), localStorage.getItem('result'))
+        await getPoint(PRODUCTION_DOMAIN+ "answer/" + localStorage.getItem('examCode'), localStorage.getItem('result'))
         .then(res => localStorage.setItem("userScore", `${JSON.stringify(res)} / ${Object.keys(JSON.parse(localStorage.getItem('exam')).lsQuizz).length}`))
         navigation('/finished');
         // eslint-disable-next-line react-hooks/exhaustive-deps
