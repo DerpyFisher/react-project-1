@@ -1,9 +1,9 @@
 import './style.scss';
-import React, { useEffect } from 'react'
+import React from 'react'
 import Timer from '../../../component/Timer/Timer'
 import { useNavigate } from 'react-router-dom'
 
-export default function Header({initialTime}) {
+export function Header({initialTime}) {
     const navigate = useNavigate();
     const onTimeUp = () => {
         localStorage.setItem('finishedTime', Date.now());
@@ -13,7 +13,7 @@ export default function Header({initialTime}) {
     return (
         <div className='examHeader'>
             <div className='headerComponent left'>
-                <h1>{localStorage.getItem('examCode')}</h1>
+                <h1>{JSON.parse(localStorage.getItem('exam')).id}</h1>
             </div>
             <div className='headerComponent'>
                 <Timer initialTime={initialTime} onTimeUpEvent={onTimeUp}/>
